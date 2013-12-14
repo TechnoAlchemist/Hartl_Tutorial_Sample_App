@@ -7,6 +7,7 @@ describe User do
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
+  it { should respond_to(:password_digest) } 
 
   it { should be_valid}
 
@@ -48,8 +49,9 @@ describe User do
 
   describe "when email address is a duplicate" do
   	before do
-  		user_with_sam_email = @user.dup
-  		user_with_sam_email.save
+  		user_with_same_email = @user.dup
+  		user_with_same_email.email = @user.email.upcase
+  		user_with_same_email.save
   	end
 
   	it { should_not be_valid }
