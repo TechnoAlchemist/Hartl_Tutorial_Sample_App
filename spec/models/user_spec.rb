@@ -70,7 +70,6 @@ describe User do
   		@user.save
   		expect(@user.reload.email).to eql mixed_case_email.downcase
   	end
-
   end
 
   describe "when password is blank" do
@@ -110,5 +109,10 @@ describe User do
   		it { should_not == user_for_invalid_password }
   		specify { user_for_invalid_password.should be_false }
   	end
+  end
+
+  describe "remember token" do
+    before { @user.save }
+    its(:remember_token) { should_not be_blank }
   end
 end
